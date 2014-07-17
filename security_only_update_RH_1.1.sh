@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Security Update only for Redhat
-# By Darren Holdaway - DataBarracks, V1
+# By Darren Holdaway
 
 # Safety feature: exit script if error is returned, or if variables not set.
 # Exit if a pipeline results in an error.
@@ -34,10 +34,6 @@ echo "updates available" >> $logfile
 
 echo "updates applied"
 
-#yum --security check-update > $logfile
-
-#yum list-security >> $logfile
-
 yum updateinfo list security >> $logfile
 
 echo "* ^ * ^ *" >> $logfile
@@ -47,14 +43,10 @@ echo "                 " >> $logfile
 echo "installed updates" >> $logfile
 echo "* * * * * * * * *" >> $logfile
 
-#yum update --security -y>> $logfile > /dev/null 2>&1 >> $logfile
-
 yum -y --security update  >> $logfile
 
 echo "installed updates"
 
 cat $logfile | mail -s "Security Updates For $hostname On $today" $receiver
-
-#mutt -s "Security Updates For $hostname On $today" -a "$logfile" $receiver < /d
 
 echo "Results logged"
