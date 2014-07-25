@@ -12,7 +12,7 @@ fi
 
 LOG=/tmp/vaild.$$.log
 grep -v "invaild" $AUTHLOG > $LOG
-users=$(grep "Failed password" $LOG | awk '{ print ${NF-5}' | SORT | uniq)
+users=$(grep "Failed password" $LOG | awk '{ print $(NF-5) }' | SORT | uniq)
 
 printf "%-5s|%-10s|%-10s|%-13s|%-33s|%s\n" "Sr#" "User" "Attempts" "IP address" "Host_Mapping" "Time range"
 
